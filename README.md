@@ -1,145 +1,82 @@
 # ESPAÑOL
 
-## 📖 Descripción
-**Triggers&regions** es un plugin para servidores **TShock** que permite ejecutar comandos automáticamente al entrar en regiones o de forma manual mediante triggers.  
-Incluye soporte para cooldowns, delays y reescritura de comandos que normalmente no funcionan desde la consola.
+## 📖 Descripción (ES)
+**Triggers&Regions** es un plugin avanzado para servidores **TShock 6 (Terraria 1.4.5)** diseñado para automatizar eventos. Permite ejecutar cadenas de comandos al entrar en regiones o de forma manual, con un control preciso sobre los tiempos de espera y una IA interna que corrige comandos de consola.
 
----
+## ⚙️ Funcionalidades Principales
+- **Sistema de Tiempos Flexible**: Soporta unidades como milisegundos (`ms`), segundos (`s`) y minutos (`m`).
+- **IA de Comandos**: Autocompleta automáticamente el nombre del jugador en comandos como `/heal`, `/god`, `/kill`, `/buff`, etc.
+- **Traducción Automática**: Convierte comandos in-game (`/i` o `/item` a `/give` `/spawnmob` `/spawnboss`) para que funcionen correctamente desde el servidor.
+- **Internacionalización**: Soporte integrado para Español, Inglés y Portugués.
 
-## ⚙️ Funcionalidades principales
-- **Triggers basados en regiones**: ejecuta comandos al entrar en una región definida.
-- **Triggers manuales**: crea triggers sin región (`none` o `global`) y ejecútalos con `/trigger run`.
-- **Cooldown y delay**: configurable por trigger.
-- **Persistencia**: todos los triggers se guardan en `triggers.json`.
 
----
+## 📝 Comandos y Sintaxis
+### `/trigger add <region|none> "<comandos>" <nombre> [start] [delay] [cooldown]`
 
-## 📝 Comandos disponibles
-- `/trigger add <region|none> <command(s)> <name> [cooldown] [delay]`  
-  Crea un trigger en una región o manual (si se usa `none`).
-- `/trigger list`  
-  Lista todos los triggers.
-- `/trigger delete <number|name>`  
-  Elimina un trigger por índice o nombre.
-- `/trigger rename <number|name> <newName>`  
-  Renombra un trigger.
-- `/trigger run <number|name>`  
-  Ejecuta un trigger manualmente.
-- `/trigger clear`  
-  Elimina todos los triggers de una vez.
-- `/trigger help`  
-  Muestra la ayuda.
-  
----
+- **region|none**: Nombre de la región de TShock o `none` para triggers exclusivamente manuales.
+- **"comandos"**: Lista de comandos separados por `&&`. Ejemplo: `"/heal && /say Hola"`
+- **nombre**: Identificador único del trigger.
+- **start**: Tiempo de espera antes de iniciar el primer comando (Ej: `3s`).
+- **delay**: Tiempo de espera entre cada comando de la cadena (Ej: `500ms`).
+- **cooldown**: Tiempo que debe pasar antes de poder reactivar el trigger (Ej: `5m`).
+
+### Otros Comandos:
+- `/trigger list`: Muestra todos los triggers registrados.
+- `/trigger delete <nombre>`: Elimina un trigger específico.
+- `/trigger rename <nombre> <nuevoNombre>`: Cambia el nombre de un trigger.
+- `/trigger run <nombre>`: Ejecuta un trigger manualmente (si el cooldown lo permite).
+- `/trigger clear`: Borra toda la base de datos de triggers.
+
 
 ## 🔑 Permisos
-- Para **agregar, editar, eliminar, renombrar, limpiar o ejecutar triggers**, un jugador debe tener el permiso `trigger.permission`
-- Sin este permiso, los jugadores no pueden gestionar triggers.
-
----
-
-## 📂 Persistencia
-- Los triggers se guardan en `triggers.json` dentro de la carpeta de TShock.
-- Se cargan automáticamente al iniciar el servidor.
-- Se actualizan cada vez que se agregan, eliminan, renombran o se limpian.
-
----
-
-## ✅ Ejemplos de uso
-
-- Crear un trigger automático (activado por region):  
-`/trigger add MiRegion "/heal && /buff 1" CurarBuff 30`
-Al entrar en `MiRegion`, el jugador se cura y recibe el buff 1, con un cooldown de 30 segundos.
-
-- Crear un trigger manual:
-`/trigger add none "/spawnboss 50" BossManual 60 0`
-Crea un trigger llamado `BossManual` que invoca al boss con ID 50.  
-Solo se ejecuta manualmente con `/trigger run BossManual`
-
----
-
-## 👤 Autor
-- **PakeMPC**
-
----
-
-## 📌 Notas
-- Todos los comandos se ejecutan como **Server/SuperAdmin** para evitar problemas de permisos, aunque esto puede provocar que no funcionen algunos comandos de plugins de terceros.
-- Los triggers sin región (`none`) nunca se activan automáticamente, solo mediante `/trigger run`.
-- El cooldown afecta en cuánto tiempo puede volver a activarse/ejecutarse el trigger.
-- El delay afecta cuanto tardará en ejecutarse cada comando, si tienes varios comandos en un trigger y pusiste delay de 5, el primer comando se ejecutará después de 5 segundos, el segundo se ejecutará 5 segundos después que el primero y así sucesivamente.
+- `trigger.permission`: Permite crear, borrar, renombrar, listar y limpiar triggers (Administración).
+- `trigger.run`: Permite ejecutar triggers manualmente con `/trigger run` (Usuarios).
 
 
+## 📂 Configuración y Persistencia
+El plugin genera automáticamente dos archivos en la carpeta de TShock:
+1. **`TR_Config.json`**: Configura el idioma (`es`, `en`, `pt`) y los tiempos por defecto.
+2. **`TR_Triggers.json`**: Almacena todos tus triggers creados.
 
-
-
+-----------
 
 # ENGLISH
 
-## 📖 Description
-**Triggers&regions** is a plugin for **TShock** servers that allows executing commands automatically when entering regions or manually through triggers.  
-It includes support for cooldowns, delays, and command rewriting for commands that normally don’t work from the console.
+## 📖 Description (EN)
+**Triggers&Regions** is an advanced plugin for **TShock 6 (Terraria 1.4.5)** servers designed to automate events. It allows the execution of command chains upon entering regions or via manual triggers, featuring precise timing control and an internal AI that corrects console-specific commands.
 
----
+## ⚙️ Key Features
+* **Flexible Timing System**: Supports units such as milliseconds (`ms`), seconds (`s`), and minutes (`m`).
+* **Command AI**: Automatically fills in the player's name for commands like `/heal`, `/god`, `/kill`, `/buff`, etc.
+* **Auto-Translation**: Converts in-game commands (`/i`, `/item`, `/spawnmob`, `/spawnboss`) so they function correctly when triggered by the server.
+* **Internationalization**: Built-in support for English, Spanish, and Portuguese.
 
-## ⚙️ Main Features
-- **Region-based triggers**: run commands when entering a defined region.
-- **Manual triggers**: create triggers without a region (`none` or `global`) and run them with `/trigger run`.
-- **Cooldown and delay**: configurable per trigger.
-- **Persistence**: all triggers are saved in `triggers.json`.
 
----
+## 📝 Commands and Syntax
+### `/trigger add <region|none> "<commands>" <name> [start] [delay] [cooldown]`
 
-## 📝 Available Commands
-- `/trigger add <region|none> <command(s)> <name> [cooldown] [delay]`  
-  Creates a trigger in a region or manual-only (if `none` is used).
-- `/trigger list`  
-  Lists all triggers.
-- `/trigger delete <number|name>`  
-  Deletes a trigger by index or name.
-- `/trigger rename <number|name> <newName>`  
-  Renames a trigger.
-- `/trigger run <number|name>`  
-  Executes a trigger manually.
-- `/trigger clear`  
-  Deletes all triggers at once.
-- `/trigger help`  
-  Shows help information.
+* **region|none**: The name of the TShock region or `none` for exclusively manual triggers.
+* **"commands"**: A list of commands separated by `&&`. Example: `"/heal && /say Hello"`
+* **name**: A unique identifier for the trigger.
+* **start**: Delay before the first command is executed (e.g., `3s`).
+* **delay**: Delay between each command in the chain (e.g., `500ms`).
+* **cooldown**: Time required before the trigger can be activated again (e.g., `5m`).
 
----
+### Other Commands:
+* `/trigger list`: Displays all registered triggers.
+* `/trigger delete <name>`: Deletes a specific trigger.
+* `/trigger rename <name> <newName>`: Changes the name of an existing trigger.
+* `/trigger run <name>`: Manually executes a trigger (if the cooldown allows).
+* `/trigger clear`: Deletes the entire trigger database.
+
 
 ## 🔑 Permissions
-- To **add, edit, delete, rename, clear, or run triggers**, a player must have the `trigger.permission`
-- Without this permission, players cannot manage triggers.
+* **`trigger.permission`**: Allows creating, deleting, renaming, listing, and clearing triggers (Administration).
+* **`trigger.run`**: Allows manually executing triggers via `/trigger run` (Users).
 
----
 
-## 📂 Persistence
-- Triggers are saved in `triggers.json` inside the TShock folder.
-- They are automatically loaded when the server starts.
-- They are updated whenever triggers are added, deleted, renamed, or cleared.
+## 📂 Configuration and Persistence
+The plugin automatically generates two files in the TShock folder:
+1.  **`TR_Config.json`**: Configures the language (`en`, `es`, `pt`) and default time values.
+2.  **`TR_Triggers.json`**: Stores all of your created triggers.
 
----
-
-## ✅ Usage Examples
-
-- Create an automatic trigger:
-`/trigger add MyRegion "/heal && /buff 1" HealBuff 30 0`
-When entering `MyRegion`, the player is healed and receives buff 1, with a 30-second cooldown.
-
-- Create a manual trigger:
-`/trigger add none "/spawnboss 50" BossManual 60 0`
-Creates a trigger named `BossManual` that spawns the boss with ID 50.  
-It only runs manually with:
-`/trigger run BossManual`
-
----
-
-## 👤 Author
-- **PakeMPC**
-
----
-
-## 📌 Notes
-- All commands are executed as **Server/SuperAdmin** to avoid permission issues.
-- Triggers without a region (`none`) never activate automatically, only via `/trigger run`.
